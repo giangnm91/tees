@@ -1,0 +1,189 @@
+<div ng-controller="AddOrderCtrl">
+	<!-- BEGIN PAGE HEAD-->
+    <div class="page-head">
+        <!-- BEGIN PAGE TITLE -->
+        <div class="page-title">
+            <h1>TẠO ORDER
+                <small>Trang tạo order sản phẩm cho admin</small>
+            </h1>
+        </div>
+        <!-- END PAGE TITLE -->
+        <!-- BEGIN PAGE TOOLBAR -->
+        <div class="page-toolbar">
+            <div id="dashboard-report-range" class="pull-right tooltips btn btn-fit-height green" data-placement="top" data-original-title="Change dashboard date range">
+                <i class="icon-calendar"></i>&nbsp;
+                <span class="thin uppercase hidden-xs"></span>&nbsp;
+                <i class="fa fa-angle-down"></i>
+            </div>
+        </div>
+        <!-- END PAGE TOOLBAR -->
+    </div>
+    <ul class="page-breadcrumb breadcrumb">
+        <li>
+            <a href="/home">Trang chủ</a>
+        </li>
+        <li>
+            <a href="app#/order">Order</a>
+        </li>
+        <li>
+            <span class="active">Tạo Order</span>
+        </li>
+    </ul>
+    <!-- END PAGE HEAD-->
+
+    <!-- BEGIN CONTENT -->
+    <div class="col-lg-4">
+        <div class="portlet box blue">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-user"></i> TÌM KIẾM USER </div>
+                <div class="tools">
+                    <a href="" class="collapse"> </a>
+                </div>
+            </div>
+            <div class="portlet-body form" id="form-search-user">
+                <div class="form-body">
+                    <form action="" ng-submit="findUser()">
+                        <h4>Nhập mã user:</h4>                
+                        <div class="form-group">
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="input-user" placeholder="Mã User"><!--  <button type="submit" class="btn btn-default">Tìm kiếm</button> -->
+                                <span type="submit" ng-click="findUser()" class="input-group-addon"><i class="fa fa-search"></i></span>    
+                            </div>                                           
+                        </div>  
+                    </form>                                                         
+                </div>
+            </div>
+        </div> 
+    </div>
+    
+    <div class="col-lg-4">
+        <div class="portlet box blue" ng-if="User !==undefined">
+             <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-user"></i> CHỦ ĐƠN HÀNG </div>
+                <div class="tools">
+                    <a href="" class="collapse"> </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <i class="fa fa-user"></i>
+                            Thông tin chủ đơn hàng
+                            <button class="btn btn-xs btn-success pull-right pull-right">Sửa</button>
+                        </div>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th>Họ tên:</th>
+                                    <td>{{User.UserLastName}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Địa chỉ:</th>
+                                    <td>{{User.UserAddress}}</td>
+                                </tr>
+                                <tr>
+                                    <th>Số điện thoại:</th>
+                                    <td>{{User.UserPhone}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                                            
+                </div>                                
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-4">
+        <div class="portlet box blue" ng-if="MetaData.Receiver !==undefined">
+             <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-user"></i> NGƯỜI NHẬN HÀNG </div>
+                <div class="tools">
+                    <a href="" class="collapse"> </a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="row">
+                    <div class="panel panel-info">
+                        <div class="panel-heading">
+                            <i class="fa fa-user"></i>
+                            Thông tin người nhận hàng
+                            
+                        </div>
+                        <table class="table table-striped">
+                            <tbody>
+                                <tr>
+                                    <th>Họ tên:</th>
+                                    <td><input type="text" autocomplete="off" ng-model="MetaData.Receiver.UserLastName"></td>
+                                </tr>
+                                <tr>
+                                    <th>Địa chỉ:</th>
+                                    <td><input type="text" ng-model="MetaData.Receiver.UserAddress"></td>
+                                </tr>
+                                <tr>
+                                    <th>Số điện thoại:</th>
+                                    <td><input type="text" ng-model="MetaData.Receiver.UserPhone"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>                                            
+                </div>                                
+            </div>
+        </div>
+    </div>
+    
+    <div class="clearfix"></div>
+    <div class="col-lg-12">
+        <div class="portlet box blue" ng-if="User !==undefined">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="fa fa-gift"></i> THÔNG TIN ĐƠN HÀNG </div>
+                <div class="tools">
+                    <a href="" class="collapse"> </a>
+                </div>
+            </div>
+            <div class="portlet-body form">
+                <div class="form-body">
+                    <div class="row mg-b-20">
+                        <span class="col-lg-4"></span>
+                        <span class="col-lg-4"><strong>Tỷ giá:</strong> 12345678</span>
+                        <span class="col-lg-4"><strong>Công:</strong> 12345678</span>
+                    </div>
+                    <form class="form-inline" role="form">
+                        <fieldset  data-ng-repeat="(key, order) in Orders">    
+                            <div class="mg-b-10">
+                                <div class="form-group">
+                                    <input type="text" autocomplete="off" class="form-control" id="exampleInputEmail2" placeholder="Link sản phẩm" ng-model="Orders[key].ProductUrl"> </div>
+                                <div class="form-group">
+                                    <input type="text" autocomplete="off" class="form-control" id="exampleInputPassword2" placeholder="Giá sản phẩm" ng-model="Orders[key].ProductPrice"> </div>
+                                <div class="form-group">
+                                    <input type="text" autocomplete="off" class="form-control" id="exampleInputPassword2" placeholder="Màu sắc" ng-model="Orders[key].ProductColor"> </div>
+                                <div class="form-group">
+                                    <input type="text" autocomplete="off" class="form-control" id="exampleInputPassword2" placeholder="Size" ng-model="Orders[key].ProductSize"> </div>
+                                <div class="form-group">
+                                    <input type="text" autocomplete="off" class="form-control" id="exampleInputPassword2" placeholder="Số lượng" ng-model="Orders[key].ProductQty"> </div>
+                                <div class="form-group">
+                                    <input type="text" autocomplete="off" class="form-control" id="exampleInputPassword2" placeholder="Thuế (%)" ng-model="Orders[key].ProductTax"> </div>
+                                <button class="btn red" ng-click="removeProduct(key)"><i class="fa fa-trash"></i></button>  
+                            </div>              
+                            <hr>                                
+                        </fieldset>
+                    </form>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="col-md-offset-4 col-md-8">
+                            <button type="submit" class="btn green" ng-click="addNewProduct()"><i class="fa fa-plus"></i> Thêm sản phẩm</button>
+                            <button type="button" id="btn-submit-order" class="btn blue" ng-click="submitOrder()"><i class="fa fa-check-circle"></i> Chốt đơn hàng</button>
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>     
+    </div>
+    
+</div>

@@ -1,0 +1,139 @@
+<div ng-controller="OrderCtrl">
+	<div class="row mg-b-10">
+		<div class="col-lg-6">
+		</div>
+		<div class="col-lg-6">
+			<a class="btn btn-success pull-right" href="app#/order/add" target="_blank"><i class="fa fa-plus"></i> Tạo order</a>
+		</div>
+	</div>	
+	<div class="portlet box blue ">
+        <div class="portlet-title">
+            <div class="caption">
+                <i class="fa fa-search"></i> TÌM KIẾM & LỌC </div>
+            <div class="tools">
+                <a href="" class="collapse"> </a>
+            </div>
+        </div>
+        <div class="portlet-body form">
+            <form ng-submit="LoadOrders('filter')" class="form-horizontal" role="form">
+                <div class="form-body">
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Mã order</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right">
+                                <i class="fa fa-info-circle tooltips" data-original-title="Email address" data-container="body"></i>
+                                <input type="text" ng-model="Input.OrderID" value="{{Input.OrderID}}" autocomplete="off" class="form-control"> </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Mã đặt hàng từ Nhật</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right">
+                                <i class="fa fa-info-circle tooltips" data-original-title="Email address" data-container="body"></i>
+                                <input type="text" autocomplete="off" class="form-control" ng-model="Input.OrderJpCode" value="{{Input.OrderJpCode}}"> </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-4 control-label">Mã khách hàng</label>
+                        <div class="col-md-8">
+                            <div class="input-icon right">
+                                <i class="fa fa-info-circle tooltips" data-original-title="please provide an email" data-container="body"></i>
+                                <input type="text" autocomplete="off" class="form-control" ng-model="Input.UserID" value="{{Input.UserID}}"> </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="control-label col-md-4">Khoảng thời gian</label>
+                        <div class="col-md-8">
+                            <div class="input-group input-large date-picker input-daterange" data-date="12/10/2016" data-date-format="yyyy-mm-dd">
+                                <input type="text" class="form-control" ng-model="Input.Date.From" autocomplete="off">
+                                <span class="input-group-addon"> tới </span>
+                                <input type="text" class="form-control" ng-model="Input.Date.To" autocomplete="off"> </div>
+                            <!-- /input-group -->
+                            <!-- <span class="help-block"> Select date range </span> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <div class="row">
+                        <div class="row text-center">
+                        	<button type="submit" class="btn blue">Lọc</button>
+                            <!-- <button type="button" class="btn default">Cancel</button> -->                            
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>		
+
+        <div class="table-scrollable" id="order-table">
+            <table class="table table-striped table-bordered table-hover table-list-order header-fixed">
+                <thead>
+                    <tr class="bg-primary">
+                        <th rowspan="2" scope="col" style="width:450px !important"> Lựa chọn </th>
+                        <th colspan="7" scope="col"> Thông tin sản phẩm </th>
+                        <th colspan="8" scope="col"> Thông tin đơn hàng </th>
+                        <th colspan="2" scope="col"> Ghi chú </th>
+                        <th rowspan="2" scope="col">Admin tạo đơn hàng?</th>
+                    </tr>
+					<tr class="bg-primary">
+						<th scope="col">Mã đơn hàng</th>
+                        <th scope="col">Link đặt hàng</th>
+						<th scope="col">Số lượng</th>
+						<th scope="col">Kích thước</th>
+						<th scope="col">Màu sắc</th>
+						<th scope="col">Giá trên web</th>
+                        <th scope="col">Ngày đặt</th>
+
+						<th scope="col">% Thuế</th>
+						<th scope="col">% OFF</th>
+						<th scope="col">% Công</th>
+						<th scope="col">Tổng tiền hoá đơn</th>
+						<th scope="col">Mã đặt hàng từ Nhật</th>
+						<th scope="col">Trạng thái đơn hàng</th>
+                        <th scope="col">Mã trả hàng</th>
+						<th scope="col">Sừa đơn hàng</th>						
+
+						<th scope="col">Ghi chú của khách</th>
+						<th scope="col">Ghi chú của shop</th>
+					</tr>
+                </thead>
+                <tbody ng-if="Orders.length > 0">
+               		<tr ng-repeat="(key,product) in Orders">
+               			<td class="text-center"> <input type="checkbox"> </td>
+                        <td class="text-center"> {{ product['OrderID'] }} </td>
+                        <td> <a href="{{ product['ProductUrl'] }}">{{ product['ProductUrl'] }}</a> </td>
+                        <td> {{ product['ProductQty'] }} </td>
+                        <td> {{ product['ProductSize'] }} </td>
+                        <td> {{ product['ProductColor'] }} </td>		                            
+                        <td> {{ product['ProductPrice'] | currency:"¥":0 }} </td>
+                        <td> {{ product['order']['OrderDate'] }} </td>
+                        <td class="text-center"> {{ product['ProductTax'] }} </td>
+                        <td> {{ product['OrderPercentOff'] }} </td>
+                        <td> {{ product['OrderPercentEffort'] }} </td>
+                        <td class="text-center"> {{ product['order']['OrderTotal'] | currency:"¥":0 }} </td>
+                        <td class="text-center"> {{ product['order']['OrderJpCode'] }} </td>
+                        <td class="text-center"> {{ product['order']['OrderStatus'] }}</td>                        
+                        <td> {{ product['order']['OrderReturnCode'] }} </td>
+                        <td class="text-center"> <a href="javascript:;"><i class="fa fa-wrench"></i></a> </td>
+                        <td> {{product['order']['OrderGuestNote']}} </td>
+                        <td> {{product['order']['OrderAdminNote']}} </td>
+                        <td class="text-center"> {{ product['order']['OrderCreator'] }} </td>
+               		</tr>
+                </tbody>
+            </table>
+        </div>            
+        <uib-pagination 
+            total-items="Paging.TotalItems" 
+            ng-model="Paging.CurrentPage" 
+            max-size="Paging.maxSize" 
+            items-per-page="Paging.numItem"
+            class="pagination-sm pull-right no-mg" 
+            boundary-links="true" 
+            ng-change="LoadOrders('paging')"
+            force-ellipses="true"
+            previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;">
+        </uib-pagination>
+        
+    </div>
+</div>

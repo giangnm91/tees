@@ -1,0 +1,252 @@
+@each $pixel in (0, 5, 10, 15, 20, 25, 30, 35) {
+	@if $pixel == 0 {
+		.no-pd, .pd-#{$pixel} {
+			padding: #{$pixel}px !important;
+		}
+		.no-mg, .mg-#{$pixel} {
+			margin: #{$pixel}px !important;
+		}
+	}
+	@else {
+		@each $call, $title1, $title2 in (tb,top,bottom),(lr,left,right) {
+			.pd-#{$call}-#{$pixel} {
+				padding-#{$title1}: #{$pixel}px;
+				padding-#{$title2}: #{$pixel}px;
+			}
+			.mg-#{$call}-#{$pixel} {
+				margin-#{$title1}: #{$pixel}px;
+				margin-#{$title2}: #{$pixel}px;
+			}
+		}
+
+		.pd-#{$pixel} {
+			padding: #{$pixel}px !important;
+		}
+		.mg-#{$pixel} {
+			margin: #{$pixel}px !important;
+		}
+	}
+
+	@each $call, $title in (l:left,r:right,t:top,b:bottom) {
+		.pd-#{$call}-#{$pixel} {
+			padding-#{$title}: #{$pixel}px;
+		}
+		.mg-#{$call}-#{$pixel} {
+			margin-#{$title}: #{$pixel}px;
+		}
+	}
+}
+
+@each $text, $color in ("white":#fff,666:#666,333:#333) {
+	.txt-color-#{$text} {
+		color: #{$color} !important;
+	}
+}
+
+.bg-white{
+  background-color: #fff;
+}
+a {
+	color: #333;
+	&:hover {
+		color: #C43722;
+	}
+	&:link, &:visited, &:hover, &:active {
+		text-decoration: none;
+	}
+}
+
+
+// Overite css button boostraps
+//colors
+$color_0: #f2f2f2;
+$color_1: #333;
+$color_2: #3498db;
+$color_3: #fff;
+$color_4: #e74c3c;
+$color_5: #27ae60;
+$color_6: #f1c40f;
+$color_7: #34495e;
+$color_8: #5bc0de;
+
+.btn {
+	display: inline-block;
+	text-decoration: none;
+	//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+	transition: all .2s;
+	text-align: center;
+	&:hover {
+		background: $color_0;
+		color: $color_1;
+	}
+	&.primary {
+		border-color: $color_2;
+		color: $color_2;
+		&:hover,&.hover {
+			background: $color_2;
+			color: $color_3;
+		}
+	}
+	&.danger {
+		border-color: $color_4;
+		color: $color_4;
+		&:hover,&.hover {
+			background: $color_4;
+			color: $color_3;
+		}
+	}
+	&.success {
+		border-color: $color_5;
+		color: $color_5;
+		&:hover,&.hover {
+			background: $color_5;
+			color: $color_3;
+		}
+	}
+	&.warning {
+		border-color: $color_6;
+		color: $color_6;
+		&:hover,&.hover {
+			background: $color_6;
+			color: $color_3;
+		}
+	}
+	&.black {
+		border-color: $color_7;
+		color: $color_7;
+		&:hover,&.hover {
+			background: $color_7;
+			color: $color_3;
+		}
+	}
+	&.info {
+		border-color: $color_8;
+		color: $color_8;
+		&:hover,&.hover {
+			background: $color_8;
+			color: $color_3;
+		}
+	}
+	&.clear {
+		border-color: $color_1;
+		color: $color_1;
+		&:hover,&.hover {
+			background: $color_1;
+			color: $color_3;
+		}
+	}
+}
+
+
+.btn3d {
+	position: relative;
+	top: -4px;
+	border: 0;
+	//Instead of the line below you could use @include transition($transition-1, $transition-2, $transition-3, $transition-4, $transition-5, $transition-6, $transition-7, $transition-8, $transition-9, $transition-10)
+	transition: all 40ms linear;
+	//margin: 10px 2px;
+	&:active {
+		top: 2px;
+		&:focus {
+			outline: medium none;
+		}
+	}
+	&:focus {
+		outline: medium none;
+		&:hover {
+			outline: medium none;
+		}
+	}
+	&.active {
+		top: 2px;
+	}
+	&.btn-white {
+		color: #666666;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.10) inset, 0 4px 0 0 #f5f5f5, 0 4px 4px 0 rgba(0,0,0,.2);
+		background-color: #fff;
+		&:active, &.active {
+			color: #666666;
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,.1);
+			background-color: #fff;
+		}
+	}
+	&.btn-default {
+		color: #666666;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 2px rgba(255,255,255,0.10) inset, 0 4px 0 0 #bebebe, 0 4px 4px 0 rgba(0,0,0,.2);
+		background-color: #f9f9f9;
+		&:active, &.active {
+			color: #666666;
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: 0 0 0 1px #ebebeb inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,.1);
+			background-color: #f9f9f9;
+		}
+	}
+	&.btn-primary {
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 4px 0 0 #4d5bbe, 0 4px 4px 0 rgba(0,0,0,0.5);
+		background-color: #4274d7;
+		&:active, &.active {
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: 0 0 0 1px #417fbd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+			background-color: #4274d7;
+		}
+	}
+	&.btn-success {
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px #31c300 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 4px 0 0 #5eb924, 0 4px 4px 0 rgba(0,0,0,0.5);
+		background-color: #78d739;
+		&:active, &.active {
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: 0 0 0 1px #30cd00 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+			background-color: #78d739;
+		}
+	}
+	&.btn-info {
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 4px 0 0 #348fd2, 0 4px 4px 0 rgba(0,0,0,0.5);
+		background-color: #39b3d7;
+		&:active, &.active {
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: 0 0 0 1px #00a5c3 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+			background-color: #39b3d7;
+		}
+	}
+	&.btn-warning {
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 4px 0 0 #d79a34, 0 4px 4px 0 rgba(0,0,0,0.5);
+		background-color: #feaf20;
+		&:active, &.active {
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: 0 0 0 1px #d79a47 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+			background-color: #feaf20;
+		}
+	}
+	&.btn-danger {
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 4px 0 0 #aa0000, 0 4px 4px 0 rgba(0,0,0,0.5);
+		background-color: #d73814;
+		&:active, &.active {
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: 0 0 0 1px #b93802 inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+			background-color: #d73814;
+		}
+	}
+	&.btn-magick {
+		color: #fff;
+		//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+		box-shadow: 0 0 0 1px #9a00cd inset, 0 0 0 2px rgba(255,255,255,0.15) inset, 0 4px 0 0 #9823d5, 0 4px 4px 0 rgba(0,0,0,0.5);
+		background-color: #bb39d7;
+		&:active, &.active {
+			//Instead of the line below you could use @include box-shadow($shadow-1, $shadow-2, $shadow-3, $shadow-4, $shadow-5, $shadow-6, $shadow-7, $shadow-8, $shadow-9, $shadow-10)
+			box-shadow: 0 0 0 1px #9a00cd inset, 0 0 0 1px rgba(255,255,255,0.15) inset, 0 1px 3px 1px rgba(0,0,0,0.3);
+			background-color: #bb39d7;
+		}
+	}
+}
+
+.text-bold {
+	font-weight: bold;
+}
