@@ -80,6 +80,7 @@ class JavOrder implements JavOrderContract
             	$order->products()->saveMany($data['orders']);
 			});
             DB::commit();
+            //var_dump(DB::getQueryLog());die;
             return response()->json(['code' => 200, 'message' => 'Tạo Order thành công']);
         }
         catch(PDOException $e)
