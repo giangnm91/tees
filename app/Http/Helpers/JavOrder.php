@@ -6,6 +6,8 @@ use App\Http\Helpers\Contracts\JavOrderContract;
 use App\Http\Models\Backend\Order;
 use App\Http\Models\Backend\Product, App\Http\Models\Backend\User;
 use Carbon\Carbon;
+use DB, Exception;
+
 
 class JavOrder implements JavOrderContract
 {
@@ -65,18 +67,25 @@ class JavOrder implements JavOrderContract
 
     // Hàm tạo đơn hàng
     public static function PlaceOrder($data) {        
-        if ($data && sizeof($data) > 0) {
-            $data['meta']['total'] = self::calculateTotalPrice($data['orders']);
-            $order = self::buildAnOrder($data['meta']);
-            
-            if (isset($order)) {
-                $data['orders'] = self::buildProductObjects($data['orders']);
-                $order->products()->saveMany($data['orders']);
-                return response()->json(['code' => 200, 'message' => 'Tạo Order thành công']);
-            }
-            return response()->json(['code' => 409, 'message' => 'Có lỗi trong quá trình tạo đơn hàng']);
-        }   
-        return response()->json(['code' => 409, 'message' => 'Không có sản phẩm hoặc có sản phẩm lỗi trong đơn hàng']);
+        
+    	if(empty($data)){
+    		return response()->json(['code' => 409, 'message' => 'Không có sản phẩm hoặc có sản phẩm lỗi trong đơn hàng']);
+    	}
+
+        $data['meta']['total'] = self::calculateTotalPrice($data['orders']);
+        try {
+        	DB::transaction(function () {
+			    self::buildAnOrder($data['meta']);
+				$data['orders'] = self::buildProductObjects($data['orders']);
+            	$order->products()->saveMany($data['orders']);
+			});
+            DB::commit();
+            return response()->json(['code' => 200, 'message' => 'Tạo Order thành công']);
+        } catch (Exception $e) {
+        	DB::rollBack();
+        	return response()->json(['code' => 409, 'message' => 'Có lỗi trong quá trình tạo đơn hàng']);
+        }
+        
     }
 
 }
