@@ -81,11 +81,17 @@ class JavOrder implements JavOrderContract
 			});
             DB::commit();
             return response()->json(['code' => 200, 'message' => 'Tạo Order thành công']);
-        } catch (Exception $e) {
-        	DB::rollBack();
-        	return response()->json(['code' => 409, 'message' => 'Có lỗi trong quá trình tạo đơn hàng']);
         }
-        
+        catch(PDOException $e)
+        {
+            DB::rollBack();
+        	return response()->json(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+        }
+        catch (Exception $e) {
+        	DB::rollBack();
+        	return response()->json(['code' => $e->getCode(), 'message' => $e->getMessage()]);
+        }
+
     }
 
 }
