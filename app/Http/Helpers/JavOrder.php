@@ -6,7 +6,7 @@ use App\Http\Helpers\Contracts\JavOrderContract;
 use App\Http\Models\Backend\Order;
 use App\Http\Models\Backend\Product, App\Http\Models\Backend\User;
 use Carbon\Carbon;
-use DB, Exception;
+use DB, Exception, PDOException;
 
 
 class JavOrder implements JavOrderContract
