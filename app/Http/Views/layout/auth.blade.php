@@ -19,7 +19,7 @@
 		</header>
         @yield('content')
         <footer>
-        	<p class="text-center text-mutted">EMS Portal Admin &copy;2016</p>
+        	<p class="text-center text-mutted">Tees CMS &copy;2017</p>
         </footer>
 		<!--================================================== -->	
 	    <!-- Link to Google CDN's jQuery + jQueryUI; fall back to local -->

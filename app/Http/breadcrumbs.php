@@ -2,7 +2,7 @@
 // Home
 Breadcrumbs::register('home', function($breadcrumbs)
 {
-    $breadcrumbs->push(trans("backend.Dashboard"), route('home_route'));
+   $breadcrumbs->push(trans("backend.Dashboard"), route('home_route'));
 });
 
 // Home > Article
@@ -27,14 +27,20 @@ Breadcrumbs::register('system', function($breadcrumbs)
 });
 
 // Home > System > Menu
-Breadcrumbs::register('system_menu', function($breadcrumbs)
+Breadcrumbs::register('category', function($breadcrumbs)
 {
-    $breadcrumbs->parent('system');
-    $breadcrumbs->push(trans('backend.Menu.menu_nav'), route('system_menu'));
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('backend.Category.list'), route('category'));
 });
 
 Breadcrumbs::register('order', function($breadcrumbs)
 {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('Hệ thống Order', route('order_list'));
+});
+
+Breadcrumbs::register('products', function($breadcrumbs)
+{
+    $breadcrumbs->parent('home');
+    $breadcrumbs->push(trans('backend.Product.list'), route('product'));
 });

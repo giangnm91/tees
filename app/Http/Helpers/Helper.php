@@ -21,10 +21,10 @@ class Helper
                 );
             }
             $aRetval[] = array(
-                'CategoryName' => $aChilds['title'],
-                'Slug'     => $aChilds['slug'],
-                'CategoryID'  => $aChilds['id'], 
-                'ParentID'   => $iParentId,
+                'name' => $aChilds['title'],
+                'slug'     => $aChilds['slug'],
+                'id'  => $aChilds['id'], 
+                'parent_id'   => $iParentId,
             );
             $aRetval = array_merge($aRetval, $aDescendents);
         }
@@ -53,7 +53,7 @@ class Helper
         {            
             $html .= "<ul class='sub-menu'>";
             foreach ($jsonCate as $key => $value) {
-                $html .= "<li class='nav-item start'><a class='nav-link' href='{$value['Slug']}'><i class='fa {$value['Icon']}'></i> <span class='title'>{$value['CategoryName']}</span></a>";
+                $html .= "<li class='nav-item start'><a class='nav-link' href='{$value['slug']}'><i class='fa {$value['icon']}'></i> <span class='title'>{$value['name']}</span></a>";
                 if (isset($value['children']) && sizeof($value['children']) > 0)
                 {
                     $html .= self::buildMenuTree($value['children'], true);
@@ -66,8 +66,8 @@ class Helper
         {   
             $html = '<ul class="page-sidebar-menu page-sidebar-menu-closed " data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">';         
             foreach ($jsonCate as $key => $value) {                
-                $html .= "<li class='nav-item start '><a href='{$value['Slug']}' class='nav-link nav-toggle' >
-                        <i class='fa {$value['Icon']}'></i> <span class='title'>{$value['CategoryName']}</span><span class='arrow'></span>";
+                $html .= "<li class='nav-item start '><a href='{$value['slug']}' class='nav-link nav-toggle' >
+                        <i class='fa {$value['icon']}'></i> <span class='title'>{$value['name']}</span><span class='arrow'></span>";
                 if(isset($value['children']) && count($value['children']) > 0)
                 {
                     //$html .= "<b class='caret'></b></a>";

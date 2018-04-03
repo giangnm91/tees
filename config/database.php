@@ -56,7 +56,7 @@ return [
             'driver' => 'mysql',
             'host' => env('DB_HOST', 'localhost'),
             'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'meoshop'),
+            'database' => env('DB_DATABASE', 'tees'),
             'username' => env('DB_USERNAME', 'root'),
             'password' => env('DB_PASSWORD', 'mysql'),
             'charset' => 'utf8',
@@ -80,12 +80,6 @@ return [
         ],
 
         'mongodb' => array(
-            'driver'   => 'mongodb',
-            'host'     => env('MO_HOST', 'localhost'),
-            'port'     => env('MO_PORT', 2828),
-            'database' => env('MO_DATABASE', 'ems'),
-            'username' => env('MO_USERNAME', ''),
-            'password' => env('MO_PASSWORD', '')
         ),
 
     ],

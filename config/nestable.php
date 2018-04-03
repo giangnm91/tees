@@ -1,15 +1,15 @@
 <?php
 
 return [
-    'parent'=> 'ParentID',
-    'primary_key' => 'CategoryID',
+    'parent'=> 'parent_id',
+    'primary_key' => 'id',
     'generate_url'   => true,
     'childNode' => 'children',
     'body' => [
-        'CategoryID',
-        'CategoryName',
-        'Slug',
-        'Icon',
+        'id',
+        'name',
+        'slug',
+        'icon',
     ],
     'html' => [
         'label' => 'name',
@@ -17,7 +17,7 @@ return [
     ],
     'dropdown' => [
         'prefix' => '',
-        'label' => 'CategoryName',
-        'value' => 'CategoryID'
+        'label' => 'name',
+        'value' => 'id'
     ]
 ];

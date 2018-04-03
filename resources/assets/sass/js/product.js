@@ -4,10 +4,10 @@ $(document).ready(function(){
 		var data = elem.serialize();
 		console.log(data);
 		$.ajax({
-			url: 'order/list',
-			type: 'default GET (Other values: POST)',
-			dataType: 'default: Intelligent Guess (Other values: xml, json, script, or html)',
-			data: {param1: 'value1'},
+			url: 'product',
+			type: 'POST',
+			dataType: 'json',
+			data: data,
 		})
 		.done(function() {
 			console.log("success");

@@ -8,16 +8,15 @@ use Nestable\NestableTrait;
 class Category extends Model
 {
     use NestableTrait;
-    protected $table = 'menus';    
-    protected $primaryKey = 'CategoryID';
-    protected $parent = 'ParentID';
+    protected $table = 'category';    
+    protected $primaryKey = 'id';
     public $timestamps = false;
     protected $guarded = [];
-    protected $fillable = ['CategoryName', 'CategoryID', 'ParentID','Slug', 'Icon'];
+    protected $fillable = ['id', 'name'];
 
-    public function products()
+    public function product()
     {
-        return $this->hasMany('App\Http\Models\Backend\Products','CategoryID');
+        return $this->belongsToMany('App\Http\Models\Backend\Product')->withPivot('id');
     }
 
     public static function createOrUpdate($data, $keys) {
@@ -29,21 +28,5 @@ class Category extends Model
             return \DB::table('menus')->where($keys)
                     ->update(array('CategoryName' => $data['CategoryName'], 'ParentID' => $data['ParentID'], 'Slug' => $data['Slug'], 'Icon' => $data['Icon']));
         }
-    }
-
-    public static function renderMenu() 
-    {       
-        $menu = array_reverse(self::nested()->getWithoutCache());
-        return Helper::buildMenuTree($menu);
-    }
-
-    public function parents()
-    {       
-        return $this->belongsTo('App\Http\Models\Backend\Category', 'ParentID');
-    }
-
-    public function childrens()
-    {
-        return $this->hasMany('App\Http\Models\Backend\Category', 'ParentID');
     }
 }

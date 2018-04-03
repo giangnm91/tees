@@ -7,16 +7,16 @@ use Illuminate\Database\Eloquent\Model;
 class Product extends Model
 {
     protected $table = 'products';    
-    protected $primaryKey = 'ProductID';
-    public $timestamps = false;
+    protected $primaryKey = 'id';
+    public $timestamps = true;
     protected $guarded = [];
-    protected $fillable = ['ProductID', 'ProductName', 'ProductPrice','ProductColor', 'ProductSize',
-                            'ProductDesc', 'ProductImage', 'ProductUpdateDate', 'ProductQty', 'ProductLive',
-                            'ProductTax', 'ProductUrl'];
+    protected $fillable = ['id', 'title', 'description','url', 'thumb',
+                            'mockup1', 'mockup2', 'mockup3', 'price', 'price_discount',
+                            'type', 'android_clicks','ios_clicks'];
 
-    public function order()
+    public function category()
     {
-        return $this->belongsTo('App\Http\Models\Backend\Order','OrderID');
+        return $this->belongsToMany('App\Http\Models\Backend\Category')->withPivot('id');
     }
 
 }

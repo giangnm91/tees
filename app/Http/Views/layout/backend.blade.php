@@ -4,7 +4,7 @@
         @include('layout._meta')
         <!-- BEGIN GLOBAL MANDATORY STYLES -->
         {!! Html::style('assets/css/libs/bootstrap.min.css', array('media' => 'screen')) !!}
-        {!! Html::style('http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all') !!}
+        {!! Html::style('assets/css/libs/google-fonts.css') !!}
         {!! Html::style('assets/css/libs/font-awesome.min.css', array('media' => 'screen')) !!}
         {!! Html::style('assets/css/libs/sweetalert.css', array('media' => 'screen')) !!}
         {!! Html::style('assets/global/plugins/simple-line-icons/simple-line-icons.min.css', array('media' => 'screen')) !!}

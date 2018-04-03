@@ -180,10 +180,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
-        // Added Service Providers...
-        App\Providers\JavOrderServiceProvider::class,
         //Giang\JavOrder\JavOrderServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
 
 
     ],
@@ -239,6 +237,7 @@ return [
         'Nestable' => Nestable\Facades\NestableService::class,
         'Breadcrumbs' => DaveJamesMiller\Breadcrumbs\Facade::class,
         'Helper' => App\Http\Helpers\Helper::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ],
 
 ];

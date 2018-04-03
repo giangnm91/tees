@@ -40,7 +40,7 @@ class LoginController extends Controller
     public function postLogin(AuthRequest $request) {        
         try {
             if (auth()->attempt(['email' => $request->input('email'), 'password' => $request->input('password')], $request->input('remember'),true)) {
-                Users::where('user_id',auth()->user()->user_id)->update(['login_ip' => Request::ip(),'login_at' => time()]);
+                Users::where('id',auth()->user()->id)->update(['login_ip' => Request::ip(),'login_at' => time()]);
                 return response()->json([
                     'code'     => 'success',
                     'mesage'   => 'Login success', 

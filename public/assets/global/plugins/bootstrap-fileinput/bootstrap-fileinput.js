@@ -73,39 +73,44 @@
     this.$hidden.val('')
     this.$hidden.attr('name', '')
     this.$input.attr('name', this.name)
+    for (var i = 0; i < files.length; i++) {
+    	var file = files[i]
+	    if (this.$preview.length > 0 && (typeof file.type !== "undefined" ? file.type.match(/^image\/(gif|png|jpeg)$/) : file.name.match(/\.(gif|png|jpe?g)$/i)) && typeof FileReader !== "undefined") {
+	      var reader = new FileReader()
+	      var preview = this.$preview
+	      var element = this.$element
 
-    var file = files[0]
+	      reader.onload = function(re) {
+	        var $img = $('<img class="display-thumbs">')
+	        $img[0].src = re.target.result
+	        files[0].result = re.target.result
+	        
+	        element.find('.fileinput-filename').text(file.name)
+	        
+	        // if parent has max-height, using `(max-)height: 100%` on child doesn't take padding and border into account
+	        if (preview.css('max-height') != 'none') $img.css('max-height', parseInt(preview.css('max-height'), 10) - parseInt(preview.css('padding-top'), 10) - parseInt(preview.css('padding-bottom'), 10)  - parseInt(preview.css('border-top'), 10) - parseInt(preview.css('border-bottom'), 10))
+	        	.css('display','inline-block')
+	        	.css('margin-right','5px')
+	        
+	        preview.append($img)
+	        element.addClass('fileinput-exists').removeClass('fileinput-new')
 
-    if (this.$preview.length > 0 && (typeof file.type !== "undefined" ? file.type.match(/^image\/(gif|png|jpeg)$/) : file.name.match(/\.(gif|png|jpe?g)$/i)) && typeof FileReader !== "undefined") {
-      var reader = new FileReader()
-      var preview = this.$preview
-      var element = this.$element
+	        element.trigger('change.bs.fileinput', files)
+	      }
 
-      reader.onload = function(re) {
-        var $img = $('<img>')
-        $img[0].src = re.target.result
-        files[0].result = re.target.result
-        
-        element.find('.fileinput-filename').text(file.name)
-        
-        // if parent has max-height, using `(max-)height: 100%` on child doesn't take padding and border into account
-        if (preview.css('max-height') != 'none') $img.css('max-height', parseInt(preview.css('max-height'), 10) - parseInt(preview.css('padding-top'), 10) - parseInt(preview.css('padding-bottom'), 10)  - parseInt(preview.css('border-top'), 10) - parseInt(preview.css('border-bottom'), 10))
-        
-        preview.html($img)
-        element.addClass('fileinput-exists').removeClass('fileinput-new')
-
-        element.trigger('change.bs.fileinput', files)
-      }
-
-      reader.readAsDataURL(file)
-    } else {
-      this.$element.find('.fileinput-filename').text(file.name)
-      this.$preview.text(file.name)
-      
-      this.$element.addClass('fileinput-exists').removeClass('fileinput-new')
-      
-      this.$element.trigger('change.bs.fileinput')
+	      reader.readAsDataURL(file)
+	    } else {
+	      this.$element.find('.fileinput-filename').text(file.name)
+	      this.$preview.text(file.name)
+	      
+	      this.$element.addClass('fileinput-exists').removeClass('fileinput-new')
+	      
+	      this.$element.trigger('change.bs.fileinput')
+	    }
     }
+    
+
+    
   },
 
   Fileinput.prototype.clear = function(e) {

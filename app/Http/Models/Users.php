@@ -13,8 +13,8 @@ class Users extends Model implements AuthenticatableContract
      *
      * @var string
      */
-    protected $table = 'users_admin';
-    protected $primaryKey = 'user_id';
+    protected $table = 'admin';
+    protected $primaryKey = 'id';
     public $timestamps = false;
     protected $dateFormat = 'U';
     

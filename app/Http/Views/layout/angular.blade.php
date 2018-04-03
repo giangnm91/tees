@@ -73,7 +73,7 @@
             {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/textAngular/1.5.0/textAngular.min.js') !!}
 
             
-            <script src="assets/pages/scripts/components-date-time-pickers.js" type="text/javascript"></script>
+            <script src="assets/pages/scripts/components-date-time-pickers.min.js" type="text/javascript"></script>
             <script src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js" type="text/javascript"></script>
             <script src="assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js" type="text/javascript"></script>
             {!! Html::script('assets/js/angular/app.js') !!}

@@ -5,6 +5,18 @@ return [
 	'view_more'			=> 'Xem thêm',
 	'view_detail'		=> 'Xem chi tiết',
 
+	'Product' => [
+		'list' => 'Danh sách sản phẩm',
+		'add' => 'Thêm sản phẩm',
+	],
+
+	'Category' => [
+		'list' => 'Danh sách Category',
+		'add'  => 'Thêm mới Category',
+		'name' => 'Tên category',
+		
+	],
+
 	'Common' => [
 		'add' => 'Thêm mới',
 		'action' => 'Thao tác',
