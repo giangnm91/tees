@@ -125,7 +125,7 @@ class ProductCtrl extends Controller
         $images = [];   
         foreach ($imagesUploaded as $key => $value) {           
             $image_name = url('images/frontend') . "/" . str_replace("-", "_", $value->getClientOriginalName());
-            if (!in_array($image_name, $image)) {
+            if (!in_array($image_name, $images)) {
                 array_push($images, $image_name);
             }
             $value->move($destinationPath,$image_name);
