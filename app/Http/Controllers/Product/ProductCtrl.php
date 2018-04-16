@@ -241,4 +241,30 @@ class ProductCtrl extends Controller
         }
         return $array;
     }
+
+    function getProductByCategory() {
+        $result = new \stdClass();
+        $category_id = \Input::has('catid') ? \Input::get('catid') : 1;
+        $page = \Input::has('page') ? \Input::get('page') : 0;
+        $size = \Input::has('size') ? \Input::get('size') : 10;
+
+        $products = Product::with('category')
+                ->whereHas('category', function($query) use ($category_id) {                    
+                    $query->where('category_id',$category_id);                    
+                })->limit($size)->offset($page)->get()->toJson();
+        //$product   = Product::where('id',$product_id)->get()->toArray();
+        if (isset($products) && count(json_decode($products, true)) > 0) {
+            return response()->json([
+                'code' => 200,
+                'message' => "Tìm thấy " . count(json_decode($products, true)) . " kết quả",
+                'result' => json_decode($products,true)
+            ]);           
+        } else {
+            return response()->json([
+                'code' => 500,
+                'message' => "Không tìm thấy kết quả nào.",
+                'result' => []
+            ]);
+        }
+    }
 }   

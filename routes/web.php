@@ -17,6 +17,10 @@ Route::get('auth/login', ['uses' => 'Auth\AuthCtrl@getLogin']);
 Route::post('auth/login', ['uses' => 'Auth\AuthCtrl@postLogin']);
 Route::get('auth/logout', ['uses' => 'Auth\AuthCtrl@getLogout']);
 
+Route::group(['prefix' => 'api', 'namespace' => 'Product'], function(){
+	Route::get('/product-by-category', ['uses' => 'ProductCtrl@getProductByCategory'])->name('product-by-cate');
+});
+
 Route::group(['middleware' => ['auth','csrf']], function()
 {
 	View::composer(['layout.backend', 'layout.angular'], function ($view) {
